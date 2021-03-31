@@ -1,24 +1,38 @@
 import { Component } from 'react';
 
+import * as petsService from '../../services/petsService';
+
 import CategoryNavigation from "./CategoryNavigation/CategoryNavigation";
+import PetCard from "../PetCard/PetCard";
 
 class Categories extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            pets: []
+            pets: [],
+            currentCategory: 'all',
         }
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/pets')
-        .then(resp => resp.json())
-        .then(data => this.setState({pets: data}))        
-        .catch(error => console.log(error));
-
-        console.log(this.state.pets)
+        petsService.getAll()
+            .then(res => this.setState({ pets: res }));
     }
+
+    componentDidUpdate(prevProps) {
+        const category = this.props.match.params.category;
+
+        if (prevProps.match.params.category === category) {
+            return;
+        }
+
+        petsService.getAll(category)
+            .then(res => {
+                this.setState({ pets: res, currentCategory: category })
+            })
+    }
+
     render() {
         return (
             <section className="dashboard">
@@ -27,28 +41,9 @@ class Categories extends Component {
                 <CategoryNavigation />
 
                 <ul className="other-pets-list">
-                    <li className="otherPet">
-                        <h3>Name: Gosho</h3>
-                        <p>Category: Cat</p>
-                        <p className="img"><img src="https://pics.clipartpng.com/Cat_PNG_Clip_Art-2580.png" /></p>
-                        <p className="description">This is not my cat Gosho</p>
-                        <div className="pet-info">
-                            <a href="#"><button className="button"><i class="fas fa-heart"></i> Pet</button></a>
-                            <a href="#"><button className="button">Details</button></a>
-                            <i class="fas fa-heart"></i> <span> 2</span>
-                        </div>
-                    </li>
-                    <li class="otherPet">
-                        <h3>Name: Gosho</h3>
-                        <p>Category: Cat</p>
-                        <p class="img"><img src="https://pics.clipartpng.com/Cat_PNG_Clip_Art-2580.png" /></p>
-                        <p class="description">This is not my cat Gosho</p>
-                        <div class="pet-info">
-                            <a href="#"><button class="button"><i class="fas fa-heart"></i> Pet</button></a>
-                            <a href="#"><button class="button">Details</button></a>
-                            <i class="fas fa-heart"></i> <span> 2</span>
-                        </div>
-                    </li>
+                    {this.state.pets.map(pet =>
+                        <PetCard key={pet.id} {...pet} />
+                    )}
                 </ul>
             </section>
         );

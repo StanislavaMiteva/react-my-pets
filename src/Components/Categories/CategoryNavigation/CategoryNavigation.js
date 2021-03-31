@@ -5,10 +5,10 @@ const CategoryNavigation = () => {
         <nav className="navbar">
             <ul>
                 <li><Link to="/categories/all">All</Link></li>
-                <li><Link to="/categories/Cats">Cats</Link></li>
-                <li><Link to="/categories/Dogs">Dogs</Link></li>
-                <li><Link to="/categories/Parrots">Parrots</Link></li>
-                <li><Link to="/categories/Reptiles">Reptiles</Link></li>
+                <li><Link to="/categories/Cat">Cats</Link></li>
+                <li><Link to="/categories/Dog">Dogs</Link></li>
+                <li><Link to="/categories/Parrot">Parrots</Link></li>
+                <li><Link to="/categories/Reptile">Reptiles</Link></li>
                 <li><Link to="/categories/Other">Other</Link></li>
             </ul>
         </nav>

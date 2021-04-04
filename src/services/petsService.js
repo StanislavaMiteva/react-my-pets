@@ -8,8 +8,30 @@ export const getAll = (category = '') => {
         .catch(error => console.log(error));
 };
 
-export const getOne = (petId) => {    
+export const getOne = (petId) => {
     return fetch(`${url}/${petId}`)
         .then(res => res.json())
         .catch(error => console.log(error));
 };
+
+export const create = (petName, description, imageURL, category) => {
+    let pet={
+        name: petName,
+        description,
+        imageURL,
+        category,
+        likes: 0,
+    };
+
+    return fetch(url, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(pet)
+        })
+        .then(getAll())
+        .catch(error => {
+            console.log(error, 'Error - create pet');
+        });
+}

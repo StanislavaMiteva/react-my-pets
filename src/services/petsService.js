@@ -44,7 +44,6 @@ export const update=(pet) => {
         },
         body: JSON.stringify(pet)
         })
-        .then(getAll())
         .catch(error => {
             console.log(error, 'Error - create pet');
         });

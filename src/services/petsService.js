@@ -35,3 +35,17 @@ export const create = (petName, description, imageURL, category) => {
             console.log(error, 'Error - create pet');
         });
 }
+
+export const update=(pet) => {
+    return fetch(`${url}/${pet.id}`, {
+        method: 'PUT', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(pet)
+        })
+        .then(getAll())
+        .catch(error => {
+            console.log(error, 'Error - create pet');
+        });
+}

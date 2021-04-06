@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import * as petsService from '../../services/petsService'
 
+import InputError from '../Shared/InputError/InputError';
+
 
 const EditPetDetails = ({
     match,
     history
 }) => {
     const [pet, setPet] = useState({});
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         petsService.getOne(match.params.petId)
@@ -15,21 +18,24 @@ const EditPetDetails = ({
 
     const onDescriptionSaveSubmit = (e) => {
         e.preventDefault();
-        
-        const updatedPet = {
-            id: pet.id,
-            name: pet.name,            
-            description: e.target.description.value,
-            imageURL: pet.imageURL,
-            category: pet.category,
-            likes: pet.likes,
-        }
+
+        const updatedPet = {...pet, description: e.target.description.value};
 
         petsService.update(updatedPet)
-        .then(()=> {
-            history.push('/');
-        } )
+            .then(() => {
+                history.push(`/pets/details/${updatedPet.id}`);
+            })
     }
+
+    const onDescriptionChangeHandler = (e) => {
+        if (e.target.value.length < 10) {
+            setErrorMessage('Description too short.')
+        }
+        else {
+            setErrorMessage('');
+        }
+    }
+
     return (
         <section className="detailsMyPet">
             <h3>{pet.name}</h3>
@@ -37,7 +43,14 @@ const EditPetDetails = ({
             <p className="img"><img
                 src={pet.imageURL} /></p>
             <form onSubmit={onDescriptionSaveSubmit}>
-                <textarea type="text" name="description" defaultValue={pet.description}></textarea>
+                <textarea
+                    type="text"
+                    name="description"
+                    defaultValue={pet.description}
+                    onBlur={onDescriptionChangeHandler}
+                >
+                </textarea>
+                <InputError>{errorMessage}</InputError>
                 <button className="button"> Save</button>
             </form>
         </section>

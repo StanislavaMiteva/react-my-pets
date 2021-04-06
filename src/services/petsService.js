@@ -15,7 +15,7 @@ export const getOne = (petId) => {
 };
 
 export const create = (petName, description, imageURL, category) => {
-    let pet={
+    let pet = {
         name: petName,
         description,
         imageURL,
@@ -24,26 +24,40 @@ export const create = (petName, description, imageURL, category) => {
     };
 
     return fetch(url, {
-        method: 'POST', 
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(pet)
-        })
+    })
         .then(getAll())
         .catch(error => {
             console.log(error, 'Error - create pet');
         });
 }
 
-export const update=(pet) => {
+export const update = (pet) => {
     return fetch(`${url}/${pet.id}`, {
-        method: 'PUT', 
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(pet)
-        })
+    })
+        .catch(error => {
+            console.log(error, 'Error - create pet');
+        });
+}
+
+export const updateLikes = (petId, likes) => {
+    return fetch(`${url}/${petId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({likes})
+    })
+        .then(res => res.json())
         .catch(error => {
             console.log(error, 'Error - create pet');
         });

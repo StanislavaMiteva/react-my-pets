@@ -12,13 +12,20 @@ const PetDetails = ({
             .then(res => setPet(res))
     }, []);
 
+    const onPetButtonClickHandler = (e) => {
+        let updatedLikes = Number(pet.likes) + 1;
+
+        petsSerice.updateLikes(pet.id, updatedLikes)
+            .then(updatedPet => setPet(updatedPet))
+    }
+
     return (
         <section className="detailsOtherPet">
             <h3>{pet.name}</h3>
             <p>Pet counter: {pet.likes}
-                <Link to="#"><button className="button"><i className="fas fa-heart"></i>
-                    Pet</button>
-                </Link>
+                <button className="button" onClick={onPetButtonClickHandler}><i className="fas fa-heart"></i>
+                    Pet
+                </button>
             </p>
             <p className="img"><img src={pet.imageURL} /></p>
             <p className="description">{pet.description}</p>

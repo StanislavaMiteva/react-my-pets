@@ -12,7 +12,7 @@ const PetDetails = ({
             .then(res => setPet(res))
     }, []);
 
-    const onPetButtonClickHandler = (e) => {
+    const onPetButtonClickHandler = () => {
         let updatedLikes = Number(pet.likes) + 1;
 
         petsSerice.updateLikes(pet.id, updatedLikes)

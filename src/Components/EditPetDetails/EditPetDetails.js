@@ -24,6 +24,7 @@ const EditPetDetails = ({
         petsService.update(updatedPet)
             .then(() => {
                 history.push(`/pets/details/${updatedPet.id}`);
+                //return; ??
             })
     }
 
@@ -40,8 +41,7 @@ const EditPetDetails = ({
         <section className="detailsMyPet">
             <h3>{pet.name}</h3>
             <p>Pet counter: <i className="fas fa-heart"></i> {pet.likes}</p>
-            <p className="img"><img
-                src={pet.imageURL} /></p>
+            <p className="img"><img src={pet.imageURL} /></p>
             <form onSubmit={onDescriptionSaveSubmit}>
                 <textarea
                     type="text"

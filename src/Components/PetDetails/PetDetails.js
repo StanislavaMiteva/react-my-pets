@@ -31,8 +31,9 @@ const PetDetails = ({
             <p className="description">{pet.description}</p>
             <div class="pet-info">
                 <Link to={`/pets/details/${pet.id}/edit`}><button className="button">Edit</button></Link>
+                <Link to={`/pets/${pet.id}/edit`}><button className="button">Edit New</button></Link>
                 <a href="#"><button className="button">Delete</button></a>
-                <i className="fas fa-heart"></i> <span>5</span>
+                <i className="fas fa-heart"></i> <span>{pet.likes}</span>
             </div>
         </section>
     );

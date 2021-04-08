@@ -9,6 +9,7 @@ import EditPetDetails from './Components/EditPetDetails/EditPetDetails';
 import EditPet from './Components/EditPet/EditPet';
 import CreatePetNew from './Components/CreatePetNew/CreatePetNew';
 
+import './utils/firebase';
 import './App.css';
 
 function App() {

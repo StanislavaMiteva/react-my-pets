@@ -21,7 +21,7 @@ const Login = ({
     };
 
     return (
-        <section class="login">
+        <section className="login">
             <UserFormView
                 onSubmitHandler={onLoginFormSubmitHandler}
                 formTitle="Login"

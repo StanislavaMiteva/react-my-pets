@@ -20,7 +20,7 @@ const Register = ({
             })
     }
     return (
-        <section class="register">
+        <section className="register">
             <UserFormView
                 onSubmitHandler={onRegisterFormSubmitHandler}
                 formTitle="Register"

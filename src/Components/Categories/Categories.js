@@ -1,4 +1,5 @@
 import { Component } from 'react';
+//import firebase from '../../utils/firebase';
 
 import * as petsService from '../../services/petsService';
 
@@ -18,7 +19,25 @@ class Categories extends Component {
     componentDidMount() {
         petsService.getAll()
             .then(res => this.setState({ pets: res }));
-    }
+
+        // const petsRef = firebase.database().ref('pets');
+        // petsRef.on('value', (snapshot) => {
+        //     let pets=snapshot.val();
+        //     let newState=[];
+        //     for (let pet in pets) {
+        //         newState.push({
+        //             id: pets[pet].id,
+        //             name: pets[pet].name,
+        //             description:pets[pet].description,
+        //             imageURL: pets[pet].imageURL,
+        //             likes: pets[pet].likes,
+        //             category: pets[pet].category,
+        //         });
+        //     }
+        //     this.setState({pets: newState})
+        // });
+
+    };
 
     componentDidUpdate(prevProps) {
         const category = this.props.match.params.category;

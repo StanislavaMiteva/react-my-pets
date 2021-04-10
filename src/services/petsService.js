@@ -6,6 +6,16 @@ export const getAll = (category = '') => {
     return fetch(petsUrl)
         .then(res => res.json())
         .catch(error => console.log(error));
+
+    // return fetch('https://react-my-pets-a321d-default-rtdb.firebaseio.com', {
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+    //             'mode': 'no-cors'
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .catch(error => console.log(error));
 };
 
 export const getOne = (petId) => {
@@ -55,7 +65,7 @@ export const updateLikes = (petId, likes) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({likes})
+        body: JSON.stringify({ likes })
     })
         .then(res => res.json())
         .catch(error => {
